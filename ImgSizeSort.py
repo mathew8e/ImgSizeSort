@@ -27,8 +27,8 @@ class ImgSizeSort():
                 self.height = height
                 self.ratio = width/height
                 
-        for (root, dirs, file) in walk(PATH):
-            for i in file:
+        for i in listdir(PATH):
+            if i.endswith(".png") or i.endswith(".jpg"):
                 img = Image.open("{0}/{1}".format(PATH,i))
                 w, h  = img.size
                 ArrayWithImgObjects.append(ImageObj(i, w, h))
@@ -36,8 +36,7 @@ class ImgSizeSort():
             
 
         for image in ArrayWithImgObjects:
-            # if (image.ratio =)
-            print("Ratio: {0}     Width: {1}    Height: {2}    Name: {3}".format(image.ratio, image.width, image.height, image.name))
+            # print("Ratio: {0}     Width: {1}    Height: {2}    Name: {3}".format(image.ratio, image.width, image.height, image.name))
             if image.ratio < 0.9:
                 shutil.move("{0}/{1}".format(PATH, image.name), "{0}/{1}".format(PATH, "portrait"))
             elif image.ratio >= 0.9 and image.ratio <= 1.1:
@@ -45,6 +44,3 @@ class ImgSizeSort():
             else:
                 shutil.move("{0}/{1}".format(PATH, image.name), "{0}/{1}".format(PATH, "landscape"))
                 
-
-PATH = path.abspath(r"C:\Users\mathe\Downloads\OrientalitstPhotos")
-ImgSizeSort.sort(PATH=PATH)
