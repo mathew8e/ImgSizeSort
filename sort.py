@@ -6,8 +6,9 @@ from os import path, mkdir, walk, listdir
 import shutil
 
 
-class Sort():
-    def __init__(self, PATH):
+
+def sort(PATH):
+    try:
         ArrayWithImgObjects = []
 
         def createFolders():
@@ -17,6 +18,8 @@ class Sort():
             
         if "portrait" not in listdir(PATH) or "landscape" not in listdir(PATH) or "square" not in listdir(PATH):    
             createFolders()
+        else:
+            return 2
             
         class ImageObj():
             def __init__(self, name, width, height):
@@ -41,4 +44,8 @@ class Sort():
                 shutil.move("{0}/{1}".format(PATH, image.name), "{0}/{1}".format(PATH, "square"))
             else:
                 shutil.move("{0}/{1}".format(PATH, image.name), "{0}/{1}".format(PATH, "landscape"))
-                
+        
+        return 1
+    except:
+        return 0
+            

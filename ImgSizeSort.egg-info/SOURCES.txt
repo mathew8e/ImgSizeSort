@@ -1,8 +1,0 @@
-setup.py
-ImgSizeSort/__init__.py
-ImgSizeSort/sort.py
-ImgSizeSort.egg-info/PKG-INFO
-ImgSizeSort.egg-info/SOURCES.txt
-ImgSizeSort.egg-info/dependency_links.txt
-ImgSizeSort.egg-info/not-zip-safe
-ImgSizeSort.egg-info/top_level.txt

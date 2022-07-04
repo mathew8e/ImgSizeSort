@@ -2,14 +2,14 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import ImgSizeSort.sort 
+from sort import sort
 
 
 class window(QWidget):
     def __init__(self, parent = None):
         super(window, self).__init__(parent)
         self.resize(400,150)
-        self.setWindowTitle("PyQt5")
+        self.setWindowTitle("ImgSizeSort")
         self.label = QLabel(self)
         self.label.setText("Image Size Sorter")
         font = QFont()
@@ -38,8 +38,19 @@ class window(QWidget):
       
     def Button1(self):
         path = self.textbox.text()
-        sort.sort(path)
         
+        exception = sort(path)
+        
+        msg = QMessageBox()
+        msg.setWindowTitle("ImgCloneFinderInfo")
+        if exception == 1:
+            msg.setText("Finished.")
+        elif exception == 2:
+            msg.setText("Remove folders named lands cape portrait or square.")
+        else: 
+            msg.setText("Something went wrong.")
+        
+        x = msg.exec_()
       
 def main():
    app = QApplication(sys.argv)
