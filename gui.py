@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from sort import sort
+from sort import sort, sortWideToTall
 
 
 class window(QWidget):
@@ -31,26 +31,41 @@ class window(QWidget):
         self.textbox.move(80, 60)
         self.textbox.resize(280, 30)
         
-        self.button = QPushButton('Sort', self)
+        self.button = QPushButton('Sort into three categories', self)
         self.button.move(20, 110)
-        self.button.clicked.connect(self.Button1)
+        self.button.clicked.connect(lambda:self.buttonAction(self.button))
+         
+        self.button2 = QPushButton('Sort from tall to wide', self)
+        self.button2.move(200, 110)
+        self.button2.clicked.connect(lambda:self.buttonAction(self.button2))
+        
         self.show()
-      
-    def Button1(self):
+
+   
+    def buttonAction(self, b):
         path = self.textbox.text()
         
-        exception = sort(path)
+        if b.text() == "Sort into three categories":
+            exception = sort(path)
+            exceptionMessages(exception)
+        elif b.text() == "Sort from tall to wide":
+            exception = sortWideToTall(path)
+            exceptionMessages(exception)
         
-        msg = QMessageBox()
-        msg.setWindowTitle("ImgCloneFinderInfo")
-        if exception == 1:
-            msg.setText("Finished.")
-        elif exception == 2:
-            msg.setText("Remove folders named lands cape portrait or square.")
-        else: 
-            msg.setText("Something went wrong.")
+
+def exceptionMessages(exception):
+    msg = QMessageBox()
+    msg.setWindowTitle("ImgCloneFinderInfo")
+    if exception == 1:
+        msg.setText("Finished.")
+    elif exception == 2:
+        msg.setText("Remove folders named lands cape portrait or square.")
+    else: 
+        msg.setText("Something went wrong.")
+    
+    x = msg.exec_()
+    
         
-        x = msg.exec_()
       
 def main():
    app = QApplication(sys.argv)
